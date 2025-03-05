@@ -1,0 +1,4 @@
+webserver1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
