@@ -1,2 +1,7 @@
 ---
 # tasks file for install-iis
+- name: Install IIS
+  win_feature:
+    name: Web-Server
+    state: present
+    include_management_tools: yes
