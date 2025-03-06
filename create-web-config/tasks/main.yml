@@ -4,5 +4,5 @@
 # tasks file for index.html
 - name: Create index.html file
   template:
-    src: templates/index.html.j2
+    src: ./templates/index.html.j2
     dest: c:/inetpub/wwwroot/index.html
