@@ -1,6 +1,5 @@
 ---
 # tasks file for create-web-config
----
 # tasks file for index.html
 - name: Create index.html file
   template:
