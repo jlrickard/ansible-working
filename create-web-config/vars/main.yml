@@ -1,2 +1,6 @@
 ---
 # vars file for create-web-config
+    ip_address: <ip address of ubuntu server>
+    database_name: mydatabasedev
+    db_username: sqluser
+    db_password: Pa$$w0rd
