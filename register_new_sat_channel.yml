@@ -1,0 +1,37 @@
+---
+- name: Unregister and register hosts to new Satellite channel
+  hosts: target_hosts
+  become: true
+  gather_facts: false
+  vars:
+    satellite_url: "https://satellite.example.com"
+    org: "My_Org"
+    activation_key: "new-activation-key"
+    env_name: "New_Lifecycle_Env"
+    content_view: "Base_Content_View"
+
+  tasks:
+    - name: Unregister host from Satellite
+      ansible.builtin.shell: subscription-manager unregister
+      ignore_errors: true
+
+    - name: Clean subscription-manager
+      ansible.builtin.shell: subscription-manager clean
+      ignore_errors: true
+
+    - name: Register host to Satellite
+      ansible.builtin.shell: >
+        subscription-manager register
+        --org="{{ org }}"
+        --activationkey="{{ activation_key }}"
+
+    - name: Refresh host registration (optional but recommended)
+      ansible.builtin.shell: subscription-manager refresh
+
+    - name: Verify registration (check consumed subscriptions)
+      ansible.builtin.shell: subscription-manager list --consumed
+      register: subscription_output
+
+    - name: Show subscription result
+      debug:
+        var: subscription_output.stdout
